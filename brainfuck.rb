@@ -5,9 +5,9 @@ program = STDIN.gets
 i = 0
 mp = 0
 # 8.times do
-  # for i in 0..9 do
-    # print i
-  # end
+# for i in 0..9 do
+# print i
+# end
 # end
 print "\n"
 puts program
@@ -40,18 +40,18 @@ while program[i].to_s =~ /\S|$\s/ do
     end
   when "[":
     #print "["
-    if memory[mp] == 0 
-      j = program.index(']', i)
-      tmp = program.slice(i+1,j-i-1)
-      found = tmp.scan("[")
-      n = found.length
-      #print "n = #{n}\n"
-      if n > 0
-        n.times do
-          i = j
-          j = program.index(']', i + 1)
-        end
+    if memory[mp] == 0
+      n = 0
+      m = 0
+      j = i
+      while (n==0 && m==0) || n!=m do
+        j = program.index(']', j+1)
+        m += 1
+        tmp = program.slice(i,j-i+1)
+        found = tmp.scan("[")
+        n = found.length
       end
+      #print "n = #{n}\n"
       i = j
     else #wchodzimy w petle
       loop_address.push(i)
