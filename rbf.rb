@@ -5,6 +5,17 @@ program = STDIN.gets
 i = 0
 mp = 0
 loop_address = Array.new
+
+def get_char
+  state = `stty -g`
+  begin
+    `stty raw -echo cbreak`
+    $stdin.getc
+  ensure
+    `stty #{state}`
+  end
+end
+
 while program[i].to_s =~ /\S|$\s/ do 
   instruction = program[i].chr
   case instruction
@@ -19,12 +30,7 @@ while program[i].to_s =~ /\S|$\s/ do
   when ".":
     print memory[mp].chr
   when ",":
-    begin
-      system("stty -raw echo")
-      memory[mp] = STDIN.getc
-    ensure
-      system("stty raw -echo")
-    end
+    memory[mp] = get_char
   when "[":
     if memory[mp] == 0
       n = 0
