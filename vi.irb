@@ -1,0 +1,28 @@
+program = String.new("++[+[++++]++++++++++[++]+++++]+++++++")
+#program = String.new("+++[>+++++<-]>[>+>+++>+>++>+++++>++<[++<]>---]>->-.[>++>+<<--]>--.--.+.>>>++.<<")
+8.times do
+  for i in 0..9 do
+    print i
+  end
+end
+print "\n"
+puts program
+i = program.index("[")
+j = program.index("]")
+tmp = program.slice(i+1,j-i-1)
+puts j
+puts "   #{tmp}"
+found = tmp.scan("[")
+n = found.length
+if n > 0
+  n.times do
+    puts i
+    puts j
+    puts "szukanie"
+    i = j
+    j = program.index(']', i+1)
+    puts i
+    puts j
+    puts "po znalezieniu"
+  end
+end
